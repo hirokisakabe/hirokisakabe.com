@@ -26,7 +26,7 @@ export async function PostList({ page }: { page: number }) {
               </div>
             </div>
           );
-        }
+        },
       )}
       <div className="flex pb-6">
         {range(1, Math.ceil(totalCount / PER_PAGE)).map((number, index) => (
