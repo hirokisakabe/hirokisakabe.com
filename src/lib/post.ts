@@ -1,4 +1,5 @@
 import "server-only";
+import { PostList, PostDetail } from "@/types/post";
 
 const BASE_URL = "https://hirokisakabe.microcms.io/api/v1/blogs";
 
@@ -13,7 +14,16 @@ export async function fetchPostList({ page }: { page: number }) {
     return null;
   }
 
-  return res.json();
+  const data = await res.json();
+
+  const parsed = PostList.safeParse(data);
+
+  if (!parsed.success) {
+    console.error(parsed.error);
+    return null;
+  }
+
+  return parsed.data;
 }
 
 export async function fetchPostDetail({ id }: { id: string }) {
@@ -25,5 +35,14 @@ export async function fetchPostDetail({ id }: { id: string }) {
     return null;
   }
 
-  return res.json();
+  const data = await res.json();
+
+  const parsed = PostDetail.safeParse(data);
+
+  if (!parsed.success) {
+    console.error(parsed.error);
+    return null;
+  }
+
+  return parsed.data;
 }
