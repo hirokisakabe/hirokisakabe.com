@@ -20,7 +20,7 @@ export async function PostList({ page }: { page: number }) {
         return (
           <div key={content.id} className="px-3 py-5 shadow-md">
             <Link href={`/posts/${content.id}`}>
-              <h3 className="hover:underline font-medium">{content.title}</h3>
+              <h3 className="font-medium hover:underline">{content.title}</h3>
             </Link>
             <div className="pt-3">
               <div className="text-xs">
@@ -34,7 +34,7 @@ export async function PostList({ page }: { page: number }) {
         {range(1, Math.ceil(postList.totalCount / PER_PAGE)).map(
           (number, index) => (
             <div className="px-3" key={index}>
-              <div className="hover:underline font-medium">
+              <div className="font-medium hover:underline">
                 <Link href={`?page=${number}`}>{number}</Link>{" "}
               </div>
             </div>
