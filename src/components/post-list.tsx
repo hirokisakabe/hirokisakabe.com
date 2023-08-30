@@ -1,6 +1,6 @@
-import { fetchPostList } from "@/lib/post";
 import Link from "next/link";
 import { format } from "date-fns";
+import { fetchPostList } from "@/lib/post";
 
 export async function PostList({ page }: { page: number }) {
   const postList = await fetchPostList({ page });
