@@ -12,5 +12,8 @@
     "import/resolver": {
       "typescript": { "typescript": true, "node": true }
     }
+  },
+  "rules": {
+    "import/order": "error"
   }
 }
