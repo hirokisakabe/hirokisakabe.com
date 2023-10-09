@@ -1,0 +1,47 @@
+---
+
+---
+
+<!doctype html>
+<html lang="ja">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="description" content="hiroki sakabe's blog" />
+    <meta name="viewport" content="width=device-width" />
+    <link rel="icon" href="/favicon.jpg" />
+    <meta name="generator" content={Astro.generator} />
+    <title>Hiroki SAKABE</title>
+  </head>
+  <body>
+    <div class="flex flex-col px-10 lg:flex-row lg:space-x-2">
+      <div class="basis-full lg:basis-1/4">
+        <div class="flex flex-col items-center lg:h-screen lg:flex-row">
+          <div class="">
+            <a href="/">
+              <div class="flex flex-col items-center">
+                <div class="w-28 lg:w-fit">
+                  <img src="/icon.jpg" alt={""} width={200} height={200} />
+                </div>
+                <div class="text-center">
+                  <div class="text-2xl">Hiroki SAKABE</div>
+                </div>
+                <div class="py-3 text-center">
+                  <div class="text-base">
+                    プログラミングと旅行が好きなミニマリスト
+                  </div>
+                </div>
+              </div>
+            </a>
+          </div>
+        </div>
+      </div>
+      <div class="basis-full lg:basis-3/4">
+        <div class="pt-6">
+          <main class="flex flex-col">
+            <slot />
+          </main>
+        </div>
+      </div>
+    </div>
+  </body>
+</html>
