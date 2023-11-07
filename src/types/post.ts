@@ -16,6 +16,7 @@ export type PostList = z.infer<typeof PostList>;
 export const PostDetail = z.object({
   title: z.string(),
   content: z.string(),
+  publishedAt: z.string(),
 });
 
 export type PostDetail = z.infer<typeof PostDetail>;
