@@ -34,9 +34,13 @@ export async function PostList({ page }: { page: number }) {
         {range(1, Math.ceil(postList.totalCount / PER_PAGE)).map(
           (number, index) => (
             <div className="px-3" key={index}>
-              <div className="font-medium hover:underline">
-                <Link href={`?page=${number}`}>{number}</Link>{" "}
-              </div>
+              {page === number ? (
+                <div className="font-bold">{number}</div>
+              ) : (
+                <div className="font-normal underline hover:no-underline">
+                  <Link href={`?page=${number}`}>{number}</Link>{" "}
+                </div>
+              )}
             </div>
           ),
         )}
