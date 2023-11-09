@@ -19,7 +19,7 @@ export async function PostList({ page }: { page: number }) {
       {postList.contents.map((content) => {
         return (
           <div key={content.id} className="px-3 py-5 shadow-md">
-            <Link href={`/posts/${content.id}`}>
+            <Link href={`/posts/${content.id}`} prefetch={false}>
               <h3 className="font-medium hover:underline">{content.title}</h3>
             </Link>
             <div className="pt-3">
@@ -38,7 +38,9 @@ export async function PostList({ page }: { page: number }) {
                 <div className="font-bold">{number}</div>
               ) : (
                 <div className="font-normal underline hover:no-underline">
-                  <Link href={`?page=${number}`}>{number}</Link>{" "}
+                  <Link href={`?page=${number}`} prefetch={false}>
+                    {number}
+                  </Link>{" "}
                 </div>
               )}
             </div>
