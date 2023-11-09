@@ -19,13 +19,20 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body className={inter.className}>
-        <div className="flex flex-row px-10">
-          <div className="basis-1/4">
-            <div className="flex h-screen items-center">
+        <div className="flex flex-col px-10 lg:flex-row lg:space-x-2">
+          <div className="basis-full lg:basis-1/4">
+            <div className="flex flex-col items-center lg:h-screen lg:flex-row">
               <div className="">
                 <Link href="/">
                   <div className="flex flex-col items-center">
-                    <Image src="/icon.jpg" alt={""} width={200} height={200} />
+                    <div className="w-28 lg:w-fit">
+                      <Image
+                        src="/icon.jpg"
+                        alt={""}
+                        width={200}
+                        height={200}
+                      />
+                    </div>
                     <div className="text-center">
                       <div className="text-2xl">Hiroki SAKABE</div>
                     </div>
@@ -39,7 +46,7 @@ export default function RootLayout({
               </div>
             </div>
           </div>
-          <div className="basis-3/4">
+          <div className="basis-full lg:basis-3/4">
             <div className="pt-6">
               <main className="flex flex-col">{children}</main>
             </div>

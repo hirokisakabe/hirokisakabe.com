@@ -23,7 +23,7 @@ export async function PostDetail({ id }: { id: string }) {
             </div>
           </div>
           <div
-            className="prose prose-sm max-w-none prose-h1:text-xl prose-h2:text-lg prose-h3:text-base prose-img:max-w-xl prose-img:rounded-xl"
+            className="prose prose-sm max-w-none prose-h1:text-xl prose-h2:text-lg prose-h3:text-base prose-img:max-w-full prose-img:rounded-xl lg:prose-img:max-w-xl"
             dangerouslySetInnerHTML={{
               __html: `${postDetail.content}`,
             }}
