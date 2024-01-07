@@ -1,0 +1,57 @@
+---
+import Layout from "../layouts/Layout.astro";
+import { fetchPostList } from "../lib/post";
+import { format } from "date-fns";
+import type { GetStaticPathsOptions } from "astro";
+
+export async function getStaticPaths({ paginate }: GetStaticPathsOptions) {
+  const postList = await fetchPostList({ page: 0 });
+
+  return paginate(postList.contents, { pageSize: 10 });
+}
+
+const range = (start: number, end: number) =>
+  [...Array(end - start + 1)].map((_, i) => start + i);
+
+const { page } = Astro.props;
+---
+
+<Layout>
+  <div class="space-y-7">
+    {
+      page.data ? (
+        <>
+          {page.data.map((content) => {
+            return (
+              <div class="px-3 py-5 shadow-md">
+                <a href={`/posts/${content.id}`}>
+                  <h3 class="font-medium hover:underline">{content.title}</h3>
+                </a>
+                <div class="pt-3">
+                  <div class="text-xs">
+                    {format(new Date(content.publishedAt), "yyyy/MM/dd")}
+                  </div>
+                </div>
+              </div>
+            );
+          })}
+          <div class="flex pb-6">
+            {range(1, Math.ceil(page.total / page.size)).map(
+              (number, index) => (
+                <div class="px-3">
+                  {page.currentPage === number ? (
+                    <div class="font-bold">{number}</div>
+                  ) : (
+                    <div class="font-normal underline hover:no-underline">
+                      <a href={`${number === 1 ? "/" : number}`}>{number}</a>
+                    </div>
+                  )}
+                </div>
+              ),
+            )}
+          </div>
+        </>
+      ) : null
+    }
+  </div>
+</Layout>

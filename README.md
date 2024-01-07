@@ -6,10 +6,6 @@ Hiroki SAKABE のブログ
 
 ## 採用技術
 
-- Next.js
+- astro
 - microCMS
 - Vercel
-
-## 参考ページ
-
-- https://blog.microcms.io/microcms-next-jamstack-blog/
