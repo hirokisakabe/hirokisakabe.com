@@ -27,7 +27,7 @@
   },
   "devDependencies": {
     "@tailwindcss/typography": "0.5.10",
-    "@typescript-eslint/parser": "6.11.0",
+    "@typescript-eslint/parser": "6.21.0",
     "eslint-plugin-astro": "0.31.0",
     "prettier": "3.1.0",
     "prettier-plugin-astro": "0.13.0",
