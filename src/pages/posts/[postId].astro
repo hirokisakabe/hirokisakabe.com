@@ -18,7 +18,11 @@ const { postId } = Astro.params;
 const postDetail = await fetchPostDetail({ id: postId });
 ---
 
-<Layout>
+<Layout
+  title={postDetail.title}
+  path={`/posts/${postId}/`}
+  thumbnail={`/posts/${postId}/ogp.png`}
+>
   <div class="space-y-7">
     <div class="shadow-md">
       {

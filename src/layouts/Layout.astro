@@ -1,5 +1,11 @@
 ---
+export interface Props {
+  title: string;
+  thumbnail: string;
+  path: string;
+}
 
+const { thumbnail, title, path } = Astro.props;
 ---
 
 <!doctype html>
@@ -10,6 +16,14 @@
     <meta name="viewport" content="width=device-width" />
     <link rel="icon" href="/favicon.jpg" />
     <meta name="generator" content={Astro.generator} />
+    <meta property="og:title" content={title} />
+    <meta property="og:type" content="article" />
+    <meta property="og:url" content=`https://hirokisakabe.com${path}` />
+    <meta
+      property="og:image"
+      content={"https://hirokisakabe.com" + thumbnail}
+    />
+    <meta name="twitter:card" content="summary_large_image" />
     <title>Hiroki SAKABE</title>
   </head>
   <body>
