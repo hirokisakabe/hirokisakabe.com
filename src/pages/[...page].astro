@@ -16,7 +16,7 @@ const range = (start: number, end: number) =>
 const { page } = Astro.props;
 ---
 
-<Layout>
+<Layout title="hirokisakabe.com" path="/" thumbnail={`/ogp.png`}>
   <div class="space-y-7">
     {
       page.data ? (
