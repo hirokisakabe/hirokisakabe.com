@@ -27,29 +27,27 @@ const { thumbnail, title, path } = Astro.props;
     <title>Hiroki SAKABE</title>
   </head>
   <body>
-    <div class="flex flex-col px-10 lg:flex-row lg:space-x-2">
-      <div class="basis-full lg:basis-1/4">
+    <div class="flex flex-col lg:flex-row px-10">
+      <div class="lg:w-64 lg:fixed">
         <div class="flex flex-col items-center lg:h-screen lg:flex-row">
-          <div class="lg:fixed">
-            <a href="/">
-              <div class="flex flex-col items-center">
-                <div class="w-28 lg:w-fit">
-                  <img src="/icon.jpg" alt={""} width={200} height={200} />
-                </div>
-                <div class="text-center">
-                  <div class="text-2xl">Hiroki SAKABE</div>
-                </div>
-                <div class="py-3 text-center">
-                  <div class="text-base">
-                    プログラミングと旅行が好きなミニマリスト
-                  </div>
+          <a href="/">
+            <div class="flex flex-col items-center">
+              <div class="w-28 lg:w-fit">
+                <img src="/icon.jpg" alt={""} width={200} height={200} />
+              </div>
+              <div class="text-center">
+                <div class="text-2xl">Hiroki SAKABE</div>
+              </div>
+              <div class="py-3 text-center">
+                <div class="text-base">
+                  プログラミングと旅行が好きなミニマリスト
                 </div>
               </div>
-            </a>
-          </div>
+            </div>
+          </a>
         </div>
       </div>
-      <div class="basis-full lg:basis-3/4">
+      <div class="basis-full lg:ml-64 lg:flex-1 lg:px-3">
         <div class="pt-6">
           <main class="flex flex-col">
             <slot />
