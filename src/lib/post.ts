@@ -3,7 +3,7 @@ import { PostList, PostDetail } from "../types/post";
 const BASE_URL = "https://hirokisakabe.microcms.io/api/v1/blogs";
 const HEADERS = { "X-MICROCMS-API-KEY": process.env.X_MICROCMS_API_KEY || "" };
 
-export async function fetchPostList({ page }: { page: number }) {
+export async function fetchPostList() {
   const url = `${BASE_URL}?orders=-publishedAt&limit=1000`;
 
   const res = await fetch(url, { headers: HEADERS });
