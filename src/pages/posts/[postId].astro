@@ -27,8 +27,8 @@ const postDetail = await fetchPostDetail({ id: postId });
     <div class="shadow-md">
       {
         postDetail ? (
-          <div class="p-3">
-            <div class="pb-3">
+          <div class="p-6">
+            <div>
               <div class="text-2xl">{postDetail.title}</div>
               <div class="py-1 text-sm text-slate-600">
                 {format(new Date(postDetail.publishedAt), "yyyy/MM/dd")}
