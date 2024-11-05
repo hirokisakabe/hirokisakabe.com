@@ -23,21 +23,15 @@ const postDetail = await fetchPostDetail({ id: postId });
   path={`/posts/${postId}/`}
   thumbnail={`/posts/${postId}/ogp.png`}
 >
-  <div class="space-y-7">
-    <div class="shadow-md">
-      <div class="p-6">
-        <div>
-          <div class="text-2xl">{postDetail.title}</div>
-          <div class="py-1 text-sm text-slate-600">
-            {format(new Date(postDetail.publishedAt), "yyyy/MM/dd")}
-          </div>
-        </div>
-        <div
-          class="prose prose-sm max-w-none prose-h1:text-xl prose-h2:text-lg prose-h3:text-base prose-img:max-w-full prose-img:rounded-xl lg:prose-img:max-w-xl"
-          set:html={postDetail.content}
-        />
-      </div>
+  <div class="flex flex-col gap-1 p-6 shadow-md">
+    <div class="text-2xl">{postDetail.title}</div>
+    <div class="text-sm text-slate-600">
+      {format(new Date(postDetail.publishedAt), "yyyy/MM/dd")}
     </div>
+    <div
+      class="prose prose-sm max-w-none prose-h1:text-xl prose-h2:text-lg prose-h3:text-base prose-img:max-w-full prose-img:rounded-xl lg:prose-img:max-w-xl"
+      set:html={postDetail.content}
+    />
   </div>
 </Layout>
 
