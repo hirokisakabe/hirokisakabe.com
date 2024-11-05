@@ -48,11 +48,9 @@ const { thumbnail, title, path } = Astro.props;
         </div>
       </div>
       <div class="basis-full lg:ml-64 lg:flex-1 lg:px-3">
-        <div class="pt-6">
-          <main class="flex flex-col pb-6">
-            <slot />
-          </main>
-        </div>
+        <main class="flex flex-col py-6">
+          <slot />
+        </main>
       </div>
     </div>
   </body>
