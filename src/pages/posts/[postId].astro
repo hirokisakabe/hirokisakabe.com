@@ -25,22 +25,18 @@ const postDetail = await fetchPostDetail({ id: postId });
 >
   <div class="space-y-7">
     <div class="shadow-md">
-      {
-        postDetail ? (
-          <div class="p-6">
-            <div>
-              <div class="text-2xl">{postDetail.title}</div>
-              <div class="py-1 text-sm text-slate-600">
-                {format(new Date(postDetail.publishedAt), "yyyy/MM/dd")}
-              </div>
-            </div>
-            <div
-              class="prose prose-sm max-w-none prose-h1:text-xl prose-h2:text-lg prose-h3:text-base prose-img:max-w-full prose-img:rounded-xl lg:prose-img:max-w-xl"
-              set:html={postDetail.content}
-            />
+      <div class="p-6">
+        <div>
+          <div class="text-2xl">{postDetail.title}</div>
+          <div class="py-1 text-sm text-slate-600">
+            {format(new Date(postDetail.publishedAt), "yyyy/MM/dd")}
           </div>
-        ) : null
-      }
+        </div>
+        <div
+          class="prose prose-sm max-w-none prose-h1:text-xl prose-h2:text-lg prose-h3:text-base prose-img:max-w-full prose-img:rounded-xl lg:prose-img:max-w-xl"
+          set:html={postDetail.content}
+        />
+      </div>
     </div>
   </div>
 </Layout>
