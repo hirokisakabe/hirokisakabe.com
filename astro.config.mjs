@@ -12,4 +12,8 @@ export default defineConfig({
       enabled: true,
     },
   }),
+  image: {
+    domains: ["images.microcms-assets.io"],
+    remotePatterns: [{ protocol: "https" }],
+  },
 });
