@@ -15,9 +15,9 @@
     "lint": "eslint ."
   },
   "dependencies": {
-    "@astrojs/check": "0.3.4",
-    "@astrojs/react": "3.0.10",
-    "@astrojs/tailwind": "5.1.0",
+    "@astrojs/check": "0.9.6",
+    "@astrojs/react": "3.6.3",
+    "@astrojs/tailwind": "5.1.5",
     "@astrojs/vercel": "6.1.4",
     "@types/react": "18.2.55",
     "@types/react-dom": "18.2.19",
