@@ -34,7 +34,7 @@
   "devDependencies": {
     "@playwright/test": "1.58.2",
     "@tailwindcss/typography": "0.5.15",
-    "@types/node": "20.13.0",
+    "@types/node": "20.19.37",
     "@typescript-eslint/eslint-plugin": "7.18.0",
     "@typescript-eslint/parser": "7.18.0",
     "eslint-plugin-astro": "0.34.0",
