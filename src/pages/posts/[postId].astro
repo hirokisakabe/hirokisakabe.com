@@ -29,7 +29,7 @@ const postDetail = await fetchPostDetail({ id: postId });
       {format(new Date(postDetail.publishedAt), "yyyy/MM/dd")}
     </div>
     <div
-      class="prose prose-sm max-w-none prose-h1:text-xl prose-h2:text-lg prose-h3:text-base prose-img:max-w-full prose-img:rounded-xl lg:prose-img:max-w-xl"
+      class="prose prose-sm prose-h1:text-xl prose-h2:text-lg prose-h3:text-base prose-img:max-w-full prose-img:rounded-xl lg:prose-img:max-w-xl max-w-none"
       set:html={postDetail.content}
     />
   </div>

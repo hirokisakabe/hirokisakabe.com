@@ -46,4 +46,4 @@ microCMS REST API → `src/lib/post.ts`（Zod でレスポンス検証）→ Ast
 
 ## 技術スタック
 
-Astro 4 / React 18 / TypeScript（strict）/ Tailwind CSS / @tailwindcss/typography / Prettier（astro + tailwindcss プラグイン）/ ESLint / Playwright
+Astro 6 / React 18 / TypeScript（strict）/ Tailwind CSS 4 / @tailwindcss/typography / Prettier（astro + tailwindcss プラグイン）/ ESLint / Playwright
