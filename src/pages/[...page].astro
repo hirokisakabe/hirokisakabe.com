@@ -1,13 +1,13 @@
 ---
 import Layout from "../layouts/Layout.astro";
-import { fetchPostList } from "../lib/post";
+import { getPostList } from "../lib/post";
 import { format } from "date-fns";
 import type { GetStaticPathsOptions } from "astro";
 
 export async function getStaticPaths({ paginate }: GetStaticPathsOptions) {
-  const postList = await fetchPostList();
+  const posts = await getPostList();
 
-  return paginate(postList.contents, { pageSize: 10 });
+  return paginate(posts, { pageSize: 10 });
 }
 
 const range = (start: number, end: number) =>
@@ -26,7 +26,7 @@ const { page } = Astro.props;
               <h3 class="font-medium hover:underline">{content.title}</h3>
             </a>
             <div class="pt-3 text-xs">
-              {format(new Date(content.publishedAt), "yyyy/MM/dd")}
+              {format(content.publishedAt, "yyyy/MM/dd")}
             </div>
           </div>
         );
