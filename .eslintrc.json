@@ -1,8 +1,9 @@
 {
   "extends": [
     "eslint:recommended",
-    "plugin:@typescript-eslint/recommended",
-    "plugin:astro/recommended"
+    "plugin:@typescript-eslint/strict",
+    "plugin:astro/recommended",
+    "plugin:astro/jsx-a11y-strict"
   ],
   "parser": "@typescript-eslint/parser",
   "plugins": ["@typescript-eslint"],
