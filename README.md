@@ -2,10 +2,6 @@
 
 https://hirokisakabe.com/
 
-Hiroki SAKABE のブログ
-
-## 採用技術
-
-- astro
-- microCMS
-- Vercel
+- Hiroki SAKABE のブログサイト
+- Astro（SSG）で構築し、Vercel にホスティング
+- Markdown でコンテンツ管理
