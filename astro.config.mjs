@@ -3,6 +3,7 @@ import tailwindcss from "@tailwindcss/vite";
 import vercel from "@astrojs/vercel";
 import react from "@astrojs/react";
 import sitemap from "@astrojs/sitemap";
+import rehypeImageSize from "./src/plugins/rehype-image-size.mjs";
 
 // https://astro.build/config
 export default defineConfig({
@@ -14,6 +15,9 @@ export default defineConfig({
       enabled: true,
     },
   }),
+  markdown: {
+    rehypePlugins: [rehypeImageSize],
+  },
   vite: {
     plugins: [tailwindcss()],
   },
