@@ -21,34 +21,58 @@ const { page } = Astro.props;
     {
       page.data.map((content) => {
         return (
-          <div class="px-3 py-5 shadow-md">
-            <a href={`/posts/${content.id}`}>
-              <h3 class="font-medium hover:underline">{content.title}</h3>
-            </a>
+          <a
+            href={`/posts/${content.id}`}
+            class="block rounded-lg px-3 py-5 shadow-md transition hover:shadow-lg"
+          >
+            <h3 class="font-medium">{content.title}</h3>
             <div class="pt-3 text-xs">
               {format(content.publishedAt, "yyyy/MM/dd")}
             </div>
-          </div>
+          </a>
         );
       })
     }
-    <div class="flex">
+    <nav
+      class="flex items-center justify-center gap-2"
+      aria-label="ページネーション"
+    >
+      {
+        page.url.prev && (
+          <a
+            href={page.url.prev}
+            class="rounded-md border border-gray-300 px-3 py-1 text-sm transition hover:bg-gray-100"
+          >
+            前へ
+          </a>
+        )
+      }
       {
         range(1, Math.ceil(page.total / page.size)).map((number) => (
-          <div class="px-3">
-            {page.currentPage === number ? (
-              <div class="font-bold">{number}</div>
-            ) : (
-              <a
-                class="font-normal underline hover:no-underline"
-                href={`${number === 1 ? "/" : number}`}
-              >
-                {number}
-              </a>
-            )}
-          </div>
+          <a
+            href={number === 1 ? "/" : `/${number}`}
+            class:list={[
+              "rounded-md px-3 py-1 text-sm transition",
+              page.currentPage === number
+                ? "bg-gray-800 font-bold text-white"
+                : "border border-gray-300 hover:bg-gray-100",
+            ]}
+            aria-current={page.currentPage === number ? "page" : undefined}
+          >
+            {number}
+          </a>
         ))
       }
-    </div>
+      {
+        page.url.next && (
+          <a
+            href={page.url.next}
+            class="rounded-md border border-gray-300 px-3 py-1 text-sm transition hover:bg-gray-100"
+          >
+            次へ
+          </a>
+        )
+      }
+    </nav>
   </div>
 </Layout>

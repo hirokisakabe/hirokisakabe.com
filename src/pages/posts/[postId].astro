@@ -23,13 +23,13 @@ const postDetail = await getPostDetail(postId);
   path={`/posts/${postId}/`}
   thumbnail={`/posts/${postId}/ogp.png`}
 >
-  <div class="flex flex-col gap-1 p-6 shadow-md">
-    <div class="text-2xl">{postDetail.title}</div>
-    <div class="text-sm text-slate-600">
+  <div class="rounded-lg px-3 py-5 shadow-md">
+    <h1 class="text-2xl font-medium">{postDetail.title}</h1>
+    <div class="pt-3 text-xs text-slate-600">
       {format(postDetail.publishedAt, "yyyy/MM/dd")}
     </div>
     <div
-      class="prose prose-sm prose-h1:text-xl prose-h2:text-lg prose-h3:text-base prose-img:max-w-full prose-img:h-auto prose-img:rounded-xl lg:prose-img:max-w-xl max-w-none"
+      class="prose prose-sm prose-h1:text-xl prose-h2:text-lg prose-h3:text-base prose-img:max-w-full prose-img:h-auto prose-img:rounded-xl lg:prose-img:max-w-xl mt-5 max-w-none"
     >
       <postDetail.Content />
     </div>
