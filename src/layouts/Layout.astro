@@ -26,6 +26,12 @@ const { thumbnail, title, path } = Astro.props;
       content={"https://hirokisakabe.com" + thumbnail}
     />
     <meta name="twitter:card" content="summary_large_image" />
+    <link
+      rel="alternate"
+      type="application/rss+xml"
+      title="Hiroki SAKABE"
+      href="/rss.xml"
+    />
     <title>
       {
         title === "hirokisakabe.com"
