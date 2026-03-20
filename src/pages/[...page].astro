@@ -21,14 +21,15 @@ const { page } = Astro.props;
     {
       page.data.map((content) => {
         return (
-          <div class="rounded-lg px-3 py-5 shadow-md transition hover:shadow-lg">
-            <a href={`/posts/${content.id}`}>
-              <h3 class="font-medium hover:underline">{content.title}</h3>
-            </a>
+          <a
+            href={`/posts/${content.id}`}
+            class="block rounded-lg px-3 py-5 shadow-md transition hover:shadow-lg"
+          >
+            <h3 class="font-medium">{content.title}</h3>
             <div class="pt-3 text-xs">
               {format(content.publishedAt, "yyyy/MM/dd")}
             </div>
-          </div>
+          </a>
         );
       })
     }
