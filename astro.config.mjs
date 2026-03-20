@@ -4,6 +4,7 @@ import vercel from "@astrojs/vercel";
 import react from "@astrojs/react";
 import sitemap from "@astrojs/sitemap";
 import rehypeImageSize from "./src/plugins/rehype-image-size.mjs";
+import rehypeLinkCard from "./src/plugins/rehype-link-card.mjs";
 
 // https://astro.build/config
 export default defineConfig({
@@ -16,7 +17,7 @@ export default defineConfig({
     },
   }),
   markdown: {
-    rehypePlugins: [rehypeImageSize],
+    rehypePlugins: [rehypeLinkCard, rehypeImageSize],
   },
   vite: {
     plugins: [tailwindcss()],
