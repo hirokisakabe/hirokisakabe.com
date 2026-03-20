@@ -39,5 +39,21 @@ export async function getPostDetail(id: string) {
     title: post.data.title,
     publishedAt: post.data.publishedAt,
     Content,
+    body: post.body ?? "",
   };
+}
+
+export function extractDescription(markdownBody: string, maxLength = 120) {
+  const plainText = markdownBody
+    .replace(/```[\s\S]*?```/g, "")
+    .replace(/!\[.*?\]\(.*?\)/g, "")
+    .replace(/\[([^\]]*)\]\(.*?\)/g, "$1")
+    .replace(/#{1,6}\s+/g, "")
+    .replace(/[*_~`>]/g, "")
+    .replace(/\n+/g, " ")
+    .trim();
+  if (!plainText) return undefined;
+  return plainText.length > maxLength
+    ? plainText.slice(0, maxLength) + "…"
+    : plainText;
 }

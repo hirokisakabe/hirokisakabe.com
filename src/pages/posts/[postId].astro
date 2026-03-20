@@ -1,6 +1,6 @@
 ---
 import Layout from "../../layouts/Layout.astro";
-import { getPostIds, getPostDetail } from "../../lib/post";
+import { getPostIds, getPostDetail, extractDescription } from "../../lib/post";
 import { format } from "date-fns";
 
 export async function getStaticPaths() {
@@ -22,6 +22,7 @@ const postDetail = await getPostDetail(postId);
   title={postDetail.title}
   path={`/posts/${postId}/`}
   thumbnail={`/posts/${postId}/ogp.png`}
+  description={extractDescription(postDetail.body)}
 >
   <div class="rounded-lg px-3 py-5 shadow-md">
     <h1 class="text-2xl font-medium">{postDetail.title}</h1>
