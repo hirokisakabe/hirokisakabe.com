@@ -33,8 +33,6 @@ jobs:
       - run: npm run lint
       - run: npx playwright install --with-deps
       - run: npx playwright test
-        env:
-          X_MICROCMS_API_KEY: ${{ secrets.X_MICROCMS_API_KEY }}
       - uses: actions/upload-artifact@v4
         if: ${{ !cancelled() }}
         with:

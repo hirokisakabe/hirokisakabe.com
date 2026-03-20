@@ -1,67 +1,43 @@
-import { PostList, PostDetail } from "../types/post";
+import { getCollection, getEntry, render } from "astro:content";
 
-const BASE_URL = "https://hirokisakabe.microcms.io/api/v1/blogs";
-const HEADERS = { "X-MICROCMS-API-KEY": process.env.X_MICROCMS_API_KEY || "" };
-
-export async function fetchPostList() {
-  const url = `${BASE_URL}?orders=-publishedAt&limit=1000`;
-
-  const res = await fetch(url, { headers: HEADERS });
-
-  if (!res.ok) {
-    throw new Error("Failed to fetch PostList");
-  }
-
-  const data = await res.json();
-
-  const parsed = PostList.safeParse(data);
-
-  if (!parsed.success) {
-    console.error(parsed.error);
-    throw new Error("Failed to fetch PostList");
-  }
-
-  return parsed.data;
+function sortByPublishedAtDesc<T extends { data: { publishedAt: Date } }>(
+  posts: T[],
+): T[] {
+  return posts.sort(
+    (a, b) => b.data.publishedAt.getTime() - a.data.publishedAt.getTime(),
+  );
 }
 
-export async function fetchPostIds() {
-  const url = `${BASE_URL}?orders=-publishedAt&limit=1000`;
-
-  const res = await fetch(url, { headers: HEADERS });
-
-  if (!res.ok) {
-    throw new Error("Failed to fetch PostIds");
-  }
-
-  const data = await res.json();
-
-  const parsed = PostList.safeParse(data);
-
-  if (!parsed.success) {
-    console.error(parsed.error);
-    throw new Error("Failed to fetch PostIds");
-  }
-
-  return parsed.data.contents.map((content) => content.id);
+export async function getPostList() {
+  const posts = await getCollection("posts");
+  return sortByPublishedAtDesc(posts).map((post) => ({
+    id: post.id,
+    title: post.data.title,
+    publishedAt: post.data.publishedAt,
+  }));
 }
 
-export async function fetchPostDetail({ id }: { id: string }) {
-  const url = `${BASE_URL}/${id}`;
+export async function getPostIds() {
+  const posts = await getCollection("posts");
+  return sortByPublishedAtDesc(posts).map((post) => post.id);
+}
 
-  const res = await fetch(url, { headers: HEADERS });
+export async function getPostMeta(id: string) {
+  const post = await getEntry("posts", id);
+  if (!post) throw new Error(`Post not found: ${id}`);
+  return {
+    title: post.data.title,
+    publishedAt: post.data.publishedAt,
+  };
+}
 
-  if (!res.ok) {
-    throw new Error("Failed to fetch PostDetail");
-  }
-
-  const data = await res.json();
-
-  const parsed = PostDetail.safeParse(data);
-
-  if (!parsed.success) {
-    console.error(parsed.error);
-    throw new Error("Failed to fetch PostDetail");
-  }
-
-  return parsed.data;
+export async function getPostDetail(id: string) {
+  const post = await getEntry("posts", id);
+  if (!post) throw new Error(`Post not found: ${id}`);
+  const { Content } = await render(post);
+  return {
+    title: post.data.title,
+    publishedAt: post.data.publishedAt,
+    Content,
+  };
 }

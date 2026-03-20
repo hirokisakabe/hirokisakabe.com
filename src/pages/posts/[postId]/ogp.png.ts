@@ -1,9 +1,9 @@
 import type { APIRoute } from "astro";
-import { fetchPostIds, fetchPostDetail } from "../../../lib/post";
+import { getPostIds, getPostMeta } from "../../../lib/post";
 import { getOgImage } from "../../../lib/ogp";
 
 export async function getStaticPaths() {
-  const ids = await fetchPostIds();
+  const ids = await getPostIds();
 
   return ids.map((id) => ({
     params: {
@@ -17,7 +17,7 @@ export const GET: APIRoute = async ({ params }) => {
     return new Response("Not Found", { status: 404 });
   }
 
-  const post = await fetchPostDetail({ id: params.postId });
+  const post = await getPostMeta(params.postId);
 
   return getOgImage(post.title, "public/icon.jpg");
 };

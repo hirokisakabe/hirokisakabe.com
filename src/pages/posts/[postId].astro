@@ -1,10 +1,10 @@
 ---
 import Layout from "../../layouts/Layout.astro";
-import { fetchPostIds, fetchPostDetail } from "../../lib/post";
+import { getPostIds, getPostDetail } from "../../lib/post";
 import { format } from "date-fns";
 
 export async function getStaticPaths() {
-  const ids = await fetchPostIds();
+  const ids = await getPostIds();
 
   return ids.map((id) => ({
     params: {
@@ -15,7 +15,7 @@ export async function getStaticPaths() {
 
 const { postId } = Astro.params;
 
-const postDetail = await fetchPostDetail({ id: postId });
+const postDetail = await getPostDetail(postId);
 ---
 
 <Layout
@@ -26,13 +26,12 @@ const postDetail = await fetchPostDetail({ id: postId });
   <div class="flex flex-col gap-1 p-6 shadow-md">
     <div class="text-2xl">{postDetail.title}</div>
     <div class="text-sm text-slate-600">
-      {format(new Date(postDetail.publishedAt), "yyyy/MM/dd")}
+      {format(postDetail.publishedAt, "yyyy/MM/dd")}
     </div>
     <div
       class="prose prose-sm prose-h1:text-xl prose-h2:text-lg prose-h3:text-base prose-img:max-w-full prose-img:rounded-xl lg:prose-img:max-w-xl max-w-none"
-      set:html={postDetail.content}
-    />
+    >
+      <postDetail.Content />
+    </div>
   </div>
 </Layout>
-
-<style></style>
