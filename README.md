@@ -10,7 +10,6 @@ Hiroki SAKABE のブログサイト。Astro ベースの静的サイトジェネ
 - [React](https://react.dev/) — OGP 画像生成などで使用
 - [TypeScript](https://www.typescriptlang.org/) — strict モード
 - [Tailwind CSS](https://tailwindcss.com/) — スタイリング
-- [Playwright](https://playwright.dev/) — E2E テスト
 - [Vercel](https://vercel.com/) — ホスティング・デプロイ
 
 ## セットアップ
@@ -31,7 +30,6 @@ npm run dev
 | `npm run format:check` | Prettier フォーマット確認          |
 | `npm run format:write` | Prettier 自動フォーマット          |
 | `npm run lint`         | ESLint チェック                    |
-| `npx playwright test`  | E2E テスト実行                     |
 
 ## プロジェクト構成
 
