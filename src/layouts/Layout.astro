@@ -26,17 +26,29 @@ const { thumbnail, title, path } = Astro.props;
       content={"https://hirokisakabe.com" + thumbnail}
     />
     <meta name="twitter:card" content="summary_large_image" />
-    <title>Hiroki SAKABE</title>
+    <title>
+      {
+        title === "hirokisakabe.com"
+          ? "Hiroki SAKABE"
+          : `${title} | Hiroki SAKABE`
+      }
+    </title>
   </head>
   <body>
-    <div class="flex flex-col px-10 lg:flex-row">
+    <div class="flex min-h-screen flex-col px-10 lg:flex-row">
       <div class="lg:fixed lg:w-64">
         <div class="flex flex-col items-center lg:h-screen lg:flex-row">
           <div class="flex flex-col items-center">
             <a href="/">
               <div class="flex flex-col items-center">
                 <div class="w-28 lg:w-fit">
-                  <img src="/icon.jpg" alt={""} width={200} height={200} />
+                  <img
+                    src="/icon.jpg"
+                    alt={""}
+                    width={200}
+                    height={200}
+                    class="rounded-full"
+                  />
                 </div>
                 <div class="text-center">
                   <div class="text-2xl">Hiroki SAKABE</div>
@@ -95,10 +107,17 @@ const { thumbnail, title, path } = Astro.props;
           </div>
         </div>
       </div>
-      <div class="basis-full lg:ml-64 lg:flex-1 lg:px-3">
-        <main class="flex flex-col py-6">
+      <div
+        class="flex flex-1 flex-col lg:ml-64 lg:border-l lg:border-gray-200 lg:px-3"
+      >
+        <main class="flex flex-1 flex-col py-6">
           <slot />
         </main>
+        <footer class="py-4 text-center text-sm text-gray-500">
+          <p>
+            &copy; {new Date().getFullYear()} Hiroki SAKABE. All rights reserved.
+          </p>
+        </footer>
       </div>
     </div>
   </body>
