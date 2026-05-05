@@ -1,11 +1,12 @@
 ---
 import Layout from "../layouts/Layout.astro";
-import { getPostList } from "../lib/post";
-import { format } from "date-fns";
+import { getFeedPosts } from "../lib/post";
+import { format, formatDistanceToNowStrict, isThisYear } from "date-fns";
+import { ja } from "date-fns/locale";
 import type { GetStaticPathsOptions } from "astro";
 
 export async function getStaticPaths({ paginate }: GetStaticPathsOptions) {
-  const posts = await getPostList();
+  const posts = await getFeedPosts();
 
   return paginate(posts, { pageSize: 10 });
 }
@@ -13,66 +14,112 @@ export async function getStaticPaths({ paginate }: GetStaticPathsOptions) {
 const range = (start: number, end: number) =>
   [...Array(end - start + 1)].map((_, i) => start + i);
 
+function formatTimestamp(date: Date) {
+  const diffMs = Date.now() - date.getTime();
+  const oneDayMs = 24 * 60 * 60 * 1000;
+  if (diffMs >= 0 && diffMs < oneDayMs) {
+    return formatDistanceToNowStrict(date, { addSuffix: false, locale: ja });
+  }
+  return isThisYear(date) ? format(date, "M月d日") : format(date, "yyyy/M/d");
+}
+
 const { page } = Astro.props;
 ---
 
 <Layout title="hirokisakabe.com" path="/" thumbnail={`/ogp.png`}>
-  <div class="space-y-7 pb-6">
+  <header
+    class="sticky top-0 z-10 border-b border-gray-200 bg-white/80 px-4 py-3 backdrop-blur"
+  >
+    <h1 class="text-lg font-bold">Posts</h1>
+  </header>
+  <ul class="divide-y divide-gray-200">
     {
-      page.data.map((content) => {
-        return (
-          <a
-            href={`/posts/${content.id}`}
-            class="block rounded-lg px-3 py-5 shadow-md transition hover:shadow-lg"
-          >
-            <h3 class="font-medium">{content.title}</h3>
-            <div class="pt-3 text-xs">
-              {format(content.publishedAt, "yyyy/MM/dd")}
+      page.data.map((content) => (
+        <li class="px-4 py-4 transition hover:bg-gray-50">
+          <article class="flex gap-3">
+            <a
+              href={`/posts/${content.id}`}
+              aria-label={content.title}
+              class="flex-shrink-0"
+            >
+              <img
+                src="/icon.jpg"
+                alt=""
+                width={40}
+                height={40}
+                class="h-10 w-10 rounded-full"
+              />
+            </a>
+            <div class="min-w-0 flex-1">
+              <div class="flex flex-wrap items-baseline gap-x-1.5 text-sm">
+                <span class="font-bold text-gray-900">Hiroki SAKABE</span>
+                <span class="text-gray-500">@hirokisakabe</span>
+                <span class="text-gray-500">·</span>
+                <a
+                  href={`/posts/${content.id}`}
+                  class="text-gray-500 transition hover:underline"
+                >
+                  <time datetime={content.publishedAt.toISOString()}>
+                    {formatTimestamp(content.publishedAt)}
+                  </time>
+                </a>
+              </div>
+              <h2 class="mt-0.5">
+                <a
+                  href={`/posts/${content.id}`}
+                  class="text-base font-semibold text-gray-900 transition hover:underline"
+                >
+                  {content.title}
+                </a>
+              </h2>
+              <div class="prose prose-sm prose-img:max-w-full prose-img:max-h-80 prose-img:w-auto prose-img:h-auto prose-img:rounded-xl mt-2 max-w-none">
+                <content.Content />
+              </div>
             </div>
-          </a>
-        );
-      })
+          </article>
+        </li>
+      ))
     }
-    <nav
-      class="flex items-center justify-center gap-2"
-      aria-label="ページネーション"
-    >
-      {
-        page.url.prev && (
-          <a
-            href={page.url.prev}
-            class="rounded-md border border-gray-300 px-3 py-1 text-sm transition hover:bg-gray-100"
-          >
-            前へ
-          </a>
-        )
-      }
-      {
-        range(1, Math.ceil(page.total / page.size)).map((number) => (
-          <a
-            href={number === 1 ? "/" : `/${number}`}
-            class:list={[
-              "rounded-md px-3 py-1 text-sm transition",
-              page.currentPage === number
-                ? "bg-gray-800 font-bold text-white"
-                : "border border-gray-300 hover:bg-gray-100",
-            ]}
-            aria-current={page.currentPage === number ? "page" : undefined}
-          >
-            {number}
-          </a>
-        ))
-      }
-      {
-        page.url.next && (
-          <a
-            href={page.url.next}
-            class="rounded-md border border-gray-300 px-3 py-1 text-sm transition hover:bg-gray-100"
-          >
-            次へ
-          </a>
-        )
-      }
-    </nav>
-  </div>
+  </ul>
+  <nav
+    class="flex items-center justify-center gap-2 px-4 py-6"
+    aria-label="ページネーション"
+  >
+    {
+      page.url.prev && (
+        <a
+          href={page.url.prev}
+          class="rounded-full border border-gray-300 px-3 py-1 text-sm transition hover:bg-gray-100"
+        >
+          前へ
+        </a>
+      )
+    }
+    {
+      range(1, Math.ceil(page.total / page.size)).map((number) => (
+        <a
+          href={number === 1 ? "/" : `/${number}`}
+          class:list={[
+            "rounded-full px-3 py-1 text-sm transition",
+            page.currentPage === number
+              ? "bg-gray-900 font-bold text-white"
+              : "border border-gray-300 hover:bg-gray-100",
+          ]}
+          aria-current={page.currentPage === number ? "page" : undefined}
+        >
+          {number}
+        </a>
+      ))
+    }
+    {
+      page.url.next && (
+        <a
+          href={page.url.next}
+          class="rounded-full border border-gray-300 px-3 py-1 text-sm transition hover:bg-gray-100"
+        >
+          次へ
+        </a>
+      )
+    }
+  </nav>
 </Layout>
