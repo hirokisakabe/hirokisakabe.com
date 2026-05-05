@@ -17,6 +17,21 @@ export async function getPostList() {
   }));
 }
 
+export async function getFeedPosts() {
+  const posts = await getCollection("posts");
+  return Promise.all(
+    sortByPublishedAtDesc(posts).map(async (post) => {
+      const { Content } = await render(post);
+      return {
+        id: post.id,
+        title: post.data.title,
+        publishedAt: post.data.publishedAt,
+        Content,
+      };
+    }),
+  );
+}
+
 export async function getPostIds() {
   const posts = await getCollection("posts");
   return sortByPublishedAtDesc(posts).map((post) => post.id);
