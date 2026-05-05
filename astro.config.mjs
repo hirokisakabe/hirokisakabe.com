@@ -3,6 +3,7 @@ import tailwindcss from "@tailwindcss/vite";
 import vercel from "@astrojs/vercel";
 import react from "@astrojs/react";
 import sitemap from "@astrojs/sitemap";
+import rehypeImageGrid from "./src/plugins/rehype-image-grid.mjs";
 import rehypeImageSize from "./src/plugins/rehype-image-size.mjs";
 import rehypeLinkCard from "./src/plugins/rehype-link-card.mjs";
 
@@ -17,7 +18,7 @@ export default defineConfig({
     },
   }),
   markdown: {
-    rehypePlugins: [rehypeLinkCard, rehypeImageSize],
+    rehypePlugins: [rehypeLinkCard, rehypeImageGrid, rehypeImageSize],
   },
   vite: {
     plugins: [tailwindcss()],
