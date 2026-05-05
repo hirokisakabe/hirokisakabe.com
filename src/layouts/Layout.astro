@@ -157,5 +157,41 @@ const {
       </div>
     </div>
     <SpeedInsights />
+    <dialog
+      id="image-lightbox"
+      class="image-lightbox"
+      aria-label="画像を拡大表示"
+    >
+      <img alt="" />
+    </dialog>
+    <script>
+      (() => {
+        const dialog = document.getElementById("image-lightbox");
+        if (!(dialog instanceof HTMLDialogElement)) return;
+        const lightboxImg = dialog.querySelector("img");
+        if (!(lightboxImg instanceof HTMLImageElement)) return;
+
+        document.addEventListener("click", (event) => {
+          const target = event.target;
+          if (!(target instanceof HTMLImageElement)) return;
+          if (target === lightboxImg) return;
+          if (target.closest("a")) return;
+          if (!target.closest(".prose, .image-grid")) return;
+
+          event.preventDefault();
+          lightboxImg.src = target.currentSrc || target.src;
+          lightboxImg.alt = target.alt || "";
+          dialog.showModal();
+        });
+
+        dialog.addEventListener("click", () => {
+          if (dialog.open) dialog.close();
+        });
+
+        dialog.addEventListener("close", () => {
+          lightboxImg.removeAttribute("src");
+        });
+      })();
+    </script>
   </body>
 </html>
