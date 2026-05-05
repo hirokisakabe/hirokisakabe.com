@@ -9,4 +9,4 @@ publishedAt: "2023-11-04T13:14:56.981Z"
 というか同行者がほとんど捕獲してくれました。わたしも捕獲スキル上げないと...
 
 楽しかったので、また行きたいですが、次回は春になりそうです  
-![](/images/posts/ntaifp79l9bp/IMG_9116.jpeg)![](/images/posts/ntaifp79l9bp/IMG_9106.jpeg)
+![](./ntaifp79l9bp/IMG_9116.jpeg)![](./ntaifp79l9bp/IMG_9106.jpeg)

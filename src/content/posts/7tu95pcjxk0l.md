@@ -4,7 +4,7 @@ publishedAt: "2024-03-24T06:52:05.501Z"
 ---
 
 最近、熊本を観光してきました。  
-![](/images/posts/7tu95pcjxk0l/IMG_9906.jpeg)![](/images/posts/7tu95pcjxk0l/IMG_9844.jpeg)![](/images/posts/7tu95pcjxk0l/IMG_9911.jpeg)  
+![](./7tu95pcjxk0l/IMG_9906.jpeg)![](./7tu95pcjxk0l/IMG_9844.jpeg)![](./7tu95pcjxk0l/IMG_9911.jpeg)  
 主に阿蘇山周辺です。とても楽しめました。
 
 実は福岡で用事があり、その足で九州のどこかを観光しようとなったとき、一番に熊本が浮かびました。  
