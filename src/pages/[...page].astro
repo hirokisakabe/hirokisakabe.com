@@ -59,7 +59,10 @@ const { page } = Astro.props;
                   href={`/posts/${content.id}`}
                   class="text-gray-500 transition hover:underline"
                 >
-                  <time datetime={content.publishedAt.toISOString()}>
+                  <time
+                    datetime={content.publishedAt.toISOString()}
+                    data-relative-time
+                  >
                     {formatTimestamp(content.publishedAt)}
                   </time>
                 </a>
@@ -122,4 +125,35 @@ const { page } = Astro.props;
       )
     }
   </nav>
+  <script>
+    (() => {
+      function formatRelativeTime(date: Date): string {
+        const now = new Date();
+        const diffMs = now.getTime() - date.getTime();
+        const oneDayMs = 24 * 60 * 60 * 1000;
+
+        if (diffMs >= 0 && diffMs < oneDayMs) {
+          const seconds = Math.round(diffMs / 1000);
+          if (seconds < 60) return `${seconds}秒`;
+          const minutes = Math.round(diffMs / (60 * 1000));
+          if (minutes < 60) return `${minutes}分`;
+          const hours = Math.round(diffMs / (60 * 60 * 1000));
+          return `${hours}時間`;
+        }
+
+        if (date.getFullYear() === now.getFullYear()) {
+          return `${date.getMonth() + 1}月${date.getDate()}日`;
+        }
+        return `${date.getFullYear()}/${date.getMonth() + 1}/${date.getDate()}`;
+      }
+
+      document.querySelectorAll("time[data-relative-time]").forEach((el) => {
+        const iso = el.getAttribute("datetime");
+        if (!iso) return;
+        const date = new Date(iso);
+        if (Number.isNaN(date.getTime())) return;
+        el.textContent = formatRelativeTime(date);
+      });
+    })();
+  </script>
 </Layout>
